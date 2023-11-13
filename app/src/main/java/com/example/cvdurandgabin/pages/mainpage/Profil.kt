@@ -3,6 +3,9 @@ package com.example.cvdurandgabin.pages.mainpage
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import com.example.cvdurandgabin.Destination
+
+
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,10 +17,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
@@ -32,7 +35,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.cvdurandgabin.Destination
 import com.example.cvdurandgabin.pages.acteur.acteur
 import com.example.cvdurandgabin.pages.film.film
 import com.example.cvdurandgabin.pages.mainpage.component.Bouton
@@ -41,26 +43,7 @@ import com.example.cvdurandgabin.pages.mainpage.component.Lien
 import com.example.cvdurandgabin.pages.mainpage.component.Titre
 import com.example.cvdurandgabin.pages.série.serie
 import com.example.cvdurandgabin.ui.theme.CVDurandGabinTheme
-
-class MainActivity : ComponentActivity() {
-
-    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            CVDurandGabinTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    val windowSizeClass = calculateWindowSizeClass(this)
-                    Greeting(fullName = "Gabin", classes = windowSizeClass)
-                }
-            }
-        }
-    }
-}
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
 fun Greeting(fullName:String, modifier: Modifier = Modifier, classes: WindowSizeClass) {
     val navController = rememberNavController()
@@ -69,7 +52,9 @@ fun Greeting(fullName:String, modifier: Modifier = Modifier, classes: WindowSize
 
     val destinations = listOf(Destination.Film, Destination.Serie, Destination.Acteur)
     Scaffold(
-        bottomBar = { BottomNavigation {
+        bottomBar = {
+            if(currentDestination?.route != Destination.Home.destination)
+            BottomNavigation {
             destinations.forEach { screen ->
                 BottomNavigationItem(
                     icon = { Icon(screen.icon, contentDescription = null) },
@@ -79,49 +64,16 @@ fun Greeting(fullName:String, modifier: Modifier = Modifier, classes: WindowSize
                     onClick = { navController.navigate(screen.destination) })
             }}
         }) { innerPadding ->
-        NavHost(navController, startDestination = Destination.Film.destination,
+        NavHost(navController, startDestination = Destination.Home.destination,
             Modifier.padding(innerPadding)) {
+            composable(Destination.Home.destination){ Home(
+                fullName = "Gabin Durand",
+                classes = classes,
+            ) { navController.navigate(Destination.Film.destination) }
+            }
             composable(Destination.Film.destination) { film() }
             composable(Destination.Acteur.destination) { acteur() }
             composable(Destination.Serie.destination) { serie() }
-        }
-    }
-    val classHauteur = classes.heightSizeClass
-    val classLargeur = classes.widthSizeClass
-    when (classes.widthSizeClass) {
-        WindowWidthSizeClass.Compact -> {
-            Box(contentAlignment = Alignment.Center) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Image(modifier)
-                    Titre(modifier)
-                    Spacer(modifier = Modifier.height(30.dp))
-                    Lien(modifier)
-                    Bouton(modifier)
-                }
-
-            }
-        }
-        else -> {
-            Box(contentAlignment = Alignment.BottomCenter) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceAround
-                ) {
-                    Column(verticalArrangement = Arrangement.SpaceEvenly) {
-                        Image(modifier)
-                        Lien(modifier)
-                    }
-                    Column(
-                        verticalArrangement = Arrangement.SpaceEvenly,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Titre(modifier)
-                    }
-
-                }
-                Spacer(modifier = Modifier.height(10.dp))
-                Bouton(modifier)
-            }
         }
     }
 }
