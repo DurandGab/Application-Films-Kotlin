@@ -1,5 +1,6 @@
 package com.example.cvdurandgabin.pages.mainpage
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,7 +19,8 @@ import com.example.cvdurandgabin.pages.mainpage.component.Image
 import com.example.cvdurandgabin.pages.mainpage.component.Lien
 import com.example.cvdurandgabin.pages.mainpage.component.Titre
 @Composable
-fun Home(fullName:String, modifier: Modifier = Modifier, classes: WindowSizeClass){
+fun Home(fullName:String, modifier: Modifier = Modifier, classes: WindowSizeClass, onClick: () -> Unit){
+    Log.d("XXX", "onHome")
     when (classes.widthSizeClass) {
         WindowWidthSizeClass.Compact -> {
             Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
@@ -27,7 +29,7 @@ fun Home(fullName:String, modifier: Modifier = Modifier, classes: WindowSizeClas
                     Titre(modifier)
                     Spacer(modifier = Modifier.height(30.dp))
                     Lien(modifier)
-                    Bouton(modifier)
+                    Bouton(modifier, onClick)
                 }
 
             }
@@ -51,7 +53,7 @@ fun Home(fullName:String, modifier: Modifier = Modifier, classes: WindowSizeClas
 
                 }
                 Spacer(modifier = Modifier.height(10.dp))
-                Bouton(modifier)
+                Bouton(modifier, onClick)
             }
         }
     }

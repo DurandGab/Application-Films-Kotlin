@@ -43,9 +43,10 @@ import com.example.cvdurandgabin.pages.mainpage.component.Lien
 import com.example.cvdurandgabin.pages.mainpage.component.Titre
 import com.example.cvdurandgabin.pages.série.serie
 import com.example.cvdurandgabin.ui.theme.CVDurandGabinTheme
+
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
-fun Greeting(fullName:String, modifier: Modifier = Modifier, classes: WindowSizeClass) {
+fun Greeting(fullName: String, modifier: Modifier = Modifier, classes: WindowSizeClass) {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
@@ -53,23 +54,27 @@ fun Greeting(fullName:String, modifier: Modifier = Modifier, classes: WindowSize
     val destinations = listOf(Destination.Film, Destination.Serie, Destination.Acteur)
     Scaffold(
         bottomBar = {
-            if(currentDestination?.route != Destination.Home.destination)
-            BottomNavigation {
-            destinations.forEach { screen ->
-                BottomNavigationItem(
-                    icon = { Icon(screen.icon, contentDescription = null) },
-                    label = { Text(screen.label) },
-                    selected =
-                    currentDestination?.hierarchy?.any { it.route == screen.destination } == true,
-                    onClick = { navController.navigate(screen.destination) })
-            }}
+            if (currentDestination?.route != Destination.Home.destination)
+                BottomNavigation {
+                    destinations.forEach { screen ->
+                        BottomNavigationItem(
+                            icon = { Icon(screen.icon, contentDescription = null) },
+                            label = { Text(screen.label) },
+                            selected =
+                            currentDestination?.hierarchy?.any { it.route == screen.destination } == true,
+                            onClick = { navController.navigate(screen.destination) })
+                    }
+                }
         }) { innerPadding ->
-        NavHost(navController, startDestination = Destination.Home.destination,
-            Modifier.padding(innerPadding)) {
-            composable(Destination.Home.destination){ Home(
-                fullName = "Gabin Durand",
-                classes = classes,
-            ) { navController.navigate(Destination.Film.destination) }
+        NavHost(
+            navController, startDestination = Destination.Home.destination,
+            Modifier.padding(innerPadding)
+        ) {
+            composable(Destination.Home.destination) {
+                Home(
+                    fullName = "Gabin Durand",
+                    classes = classes,
+                ) { navController.navigate(Destination.Film.destination) }
             }
             composable(Destination.Film.destination) { film() }
             composable(Destination.Acteur.destination) { acteur() }
