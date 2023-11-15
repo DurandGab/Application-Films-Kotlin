@@ -35,6 +35,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.cvdurandgabin.models.MainViewModel
 import com.example.cvdurandgabin.pages.acteur.acteur
 import com.example.cvdurandgabin.pages.film.film
 import com.example.cvdurandgabin.pages.mainpage.component.Bouton
@@ -46,7 +47,7 @@ import com.example.cvdurandgabin.ui.theme.CVDurandGabinTheme
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
-fun Greeting(fullName: String, modifier: Modifier = Modifier, classes: WindowSizeClass) {
+fun Greeting(fullName: String, modifier: Modifier = Modifier, classes: WindowSizeClass, viewModel: MainViewModel) {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
@@ -76,7 +77,7 @@ fun Greeting(fullName: String, modifier: Modifier = Modifier, classes: WindowSiz
                     classes = classes,
                 ) { navController.navigate(Destination.Film.destination) }
             }
-            composable(Destination.Film.destination) { film() }
+            composable(Destination.Film.destination) { film(viewModel) }
             composable(Destination.Acteur.destination) { acteur() }
             composable(Destination.Serie.destination) { serie() }
         }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
@@ -22,6 +23,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.cvdurandgabin.models.MainViewModel
 import com.example.cvdurandgabin.pages.acteur.acteur
 import com.example.cvdurandgabin.pages.film.film
 import com.example.cvdurandgabin.pages.mainpage.Greeting
@@ -34,9 +36,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d("XXX", "onCrit")
+
         setContent {
             val windowSizeClass = calculateWindowSizeClass(this)
-
+            val viewmodel: MainViewModel by viewModels()
 
             CVDurandGabinTheme {
                 // A surface container using the 'background' color from the theme
@@ -44,7 +47,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                   Greeting(fullName = "Gabin Durand", classes = windowSizeClass)
+                   Greeting(fullName = "Gabin Durand", classes = windowSizeClass, viewModel = viewmodel)
                 }
             }
         }

@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class Destination(val destination: String, val label: String, val icon: ImageVector) {
     object Home : Destination("home", "Home", Icons.Filled.Person)
-    object Film : Destination("film", "Liste de films", Icons.Filled.PlayArrow)
+    object Film : Destination("film", "Liste des films", Icons.Filled.PlayArrow)
     object Serie : Destination("serie", "Liste des séries", Icons.Filled.Info)
     object Acteur : Destination("acteur", "Liste des acteurs", Icons.Filled.Face)
 }
