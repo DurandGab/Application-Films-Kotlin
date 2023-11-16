@@ -7,8 +7,8 @@ import com.example.cvdurandgabin.models.TmdbMovie
 
 @Composable
 fun CardFilm(movie: TmdbMovie){
-    //AsyncImage(model = "https://image.tmbf.org/t/p/w500/${movie.poster_path}",
-                //contentDescription = "Affiche Film")
+    AsyncImage(model = "https://image.tmdb.org/t/p/w500/${movie.poster_path}",
+                contentDescription = "Affiche Film")
     Text(
         movie.title
     )

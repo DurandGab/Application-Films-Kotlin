@@ -19,11 +19,23 @@ class MainViewModel : ViewModel() {
     val api = retrofit.create(Api::class.java)
     // à partir de là, on peut appeler api.lastMovies(...)
     val movies = MutableStateFlow<List<TmdbMovie>>(listOf())
-
+    val series = MutableStateFlow<List<TmdbSerie>>(listOf())
+    val actors = MutableStateFlow<List<TmdbActor>>(listOf())
         fun getMoviesWeek() {
-            Log.d("XXXX", "Log")
+            viewModelScope.launch {
+                movies.value = api.lastmovies("d7a0c27757e49ea16fd7d78f18e896a5").results
+            }
+        }
+
+            fun getSerieWeek() {
+                viewModelScope.launch {
+                    series.value = api.lastseries("d7a0c27757e49ea16fd7d78f18e896a5").results
+                }
+    }
+
+    fun getActors() {
         viewModelScope.launch {
-            movies.value = api.lastmovies("d7a0c27757e49ea16fd7d78f18e896a5").results
+            actors.value = api.acteurs("d7a0c27757e49ea16fd7d78f18e896a5").results
         }
     }
 }
