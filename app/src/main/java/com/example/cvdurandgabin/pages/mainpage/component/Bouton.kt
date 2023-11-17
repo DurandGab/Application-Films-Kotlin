@@ -15,9 +15,10 @@ fun Bouton(modifier: Modifier, onClick: () -> Unit){
     Button(
         onClick = { onClick()
                   Log.d("XXX", "onClick")},
-        colors = ButtonDefaults.buttonColors(Color.Blue)) {
+        colors = ButtonDefaults.buttonColors(Color(0xff00ffd4))) {
         Text( text="Démarrer",
-            fontSize= 25.sp
+            fontSize= 25.sp,
+            color = Color.Black
         )
     }
 }

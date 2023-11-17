@@ -14,6 +14,7 @@ import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -35,17 +36,21 @@ fun Greeting(fullName: String, modifier: Modifier = Modifier, classes: WindowSiz
     Scaffold(
         bottomBar = {
             if (currentDestination?.route != Destination.Home.destination)
-                BottomNavigation {
+                BottomNavigation(
+                    backgroundColor = /* Votre couleur ici */ Color(0xff00ffd4)
+                ) {
                     destinations.forEach { screen ->
                         BottomNavigationItem(
                             icon = { Icon(screen.icon, contentDescription = null) },
                             label = { Text(screen.label) },
-                            selected =
-                            currentDestination?.hierarchy?.any { it.route == screen.destination } == true,
-                            onClick = { navController.navigate(screen.destination) })
+                            selected = currentDestination?.hierarchy?.any { it.route == screen.destination } == true,
+                            onClick = { navController.navigate(screen.destination) }
+                        )
                     }
                 }
-        }) { innerPadding ->
+        }
+    )
+    { innerPadding ->
         NavHost(
             navController, startDestination = Destination.Home.destination,
             Modifier.padding(innerPadding)

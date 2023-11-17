@@ -8,6 +8,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.cvdurandgabin.models.TmdbMovie
@@ -26,7 +27,10 @@ fun CardSerie(serie: TmdbSerie) {
 
         AsyncImage(
             model = "https://image.tmdb.org/t/p/w500/${serie.poster_path}",
-            contentDescription = "Affiche Film"
+            contentDescription = "Affiche Film",
+                    modifier = Modifier
+                    .fillMaxSize(),
+            contentScale = ContentScale.Crop
         )
         Text(
             serie.name

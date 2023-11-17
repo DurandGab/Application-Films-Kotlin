@@ -8,6 +8,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.cvdurandgabin.models.TmdbActor
@@ -26,7 +27,10 @@ fun CardActor(actor: TmdbActor) {
 
         AsyncImage(
             model = "https://image.tmdb.org/t/p/w500/${actor.profile_path}",
-            contentDescription = "Affiche Acteur"
+            contentDescription = "Affiche Acteur",
+            modifier = Modifier
+                .fillMaxSize(),
+            contentScale = ContentScale.Crop
         )
         Text(
             actor.name
