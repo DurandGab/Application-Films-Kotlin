@@ -1,10 +1,13 @@
 package com.example.cvdurandgabin.pages.film.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,32 +27,40 @@ fun CardFilm(movie: TmdbMovie) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .shadow(4.dp)
             .padding(12.dp)
     ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            AsyncImage(
-                model = "https://image.tmdb.org/t/p/w500/${movie.poster_path}",
-                contentDescription = "Affiche Film",
-                modifier = Modifier
-                    .fillMaxSize(),
-                contentScale = ContentScale.Crop
-            )
-            Text(
-                movie.title,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(5.dp),
-                textAlign = TextAlign.Center
+        Card(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    androidx.compose.material3.MaterialTheme.colorScheme.background,
+                    shape = RoundedCornerShape(12.dp)
+                )
+                .shadow(4.dp),
+            elevation = 0.dp //
+        ) {
 
-            )
-            Text(
-                movie.release_date,
-                textAlign = TextAlign.Center
-            )
-            Text(
-                movie.original_title
-            )
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                AsyncImage(
+                    model = "https://image.tmdb.org/t/p/w500/${movie.poster_path}",
+                    contentDescription = "Affiche Film",
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    contentScale = ContentScale.Crop
+                )
+                Text(
+                    movie.title,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(5.dp)
 
+
+                )
+                Text(
+                    movie.release_date,
+                    textAlign = TextAlign.Center
+                )
+            }
         }
     }
 }
