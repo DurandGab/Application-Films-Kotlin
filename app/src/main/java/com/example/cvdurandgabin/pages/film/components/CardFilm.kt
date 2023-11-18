@@ -46,6 +46,9 @@ fun CardFilm(movie: TmdbMovie) {
                 movie.release_date,
                 textAlign = TextAlign.Center
             )
+            Text(
+                movie.original_title
+            )
 
         }
     }
