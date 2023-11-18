@@ -6,9 +6,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.cvdurandgabin.models.TmdbActor
@@ -22,19 +25,24 @@ fun CardActor(actor: TmdbActor) {
             .shadow(4.dp)
             .padding(12.dp)
     ) {
-        Column {
-
-
-        AsyncImage(
-            model = "https://image.tmdb.org/t/p/w500/${actor.profile_path}",
-            contentDescription = "Affiche Acteur",
-            modifier = Modifier
-                .fillMaxSize(),
-            contentScale = ContentScale.Crop
-        )
-        Text(
-            actor.name
-        )
-    }
+        Column (horizontalAlignment = Alignment.CenterHorizontally){
+            AsyncImage(
+                model = "https://image.tmdb.org/t/p/w500/${actor.profile_path}",
+                contentDescription = "Affiche Acteur",
+                modifier = Modifier
+                    .fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
+            Text(
+                actor.name,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(5.dp),
+                textAlign = TextAlign.Center,
+            )
+            Text(
+                actor.original_name,
+                textAlign = TextAlign.Center
+            )
+        }
     }
 }
