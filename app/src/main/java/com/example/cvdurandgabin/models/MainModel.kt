@@ -1,6 +1,5 @@
 package com.example.cvdurandgabin.models
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cvdurandgabin.api.Api
@@ -8,7 +7,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.util.logging.LogManager
 
 class MainViewModel : ViewModel() {
     val retrofit = Retrofit.Builder()
@@ -17,25 +15,65 @@ class MainViewModel : ViewModel() {
         .build();
 
     val api = retrofit.create(Api::class.java)
+
     // à partir de là, on peut appeler api.lastMovies(...)
     val movies = MutableStateFlow<List<TmdbMovie>>(listOf())
     val series = MutableStateFlow<List<TmdbSerie>>(listOf())
     val actors = MutableStateFlow<List<TmdbActor>>(listOf())
-        fun getMoviesWeek() {
-            viewModelScope.launch {
-                movies.value = api.lastmovies("d7a0c27757e49ea16fd7d78f18e896a5").results
+    val detailMovie = MutableStateFlow<List<TmdbMovie>>(listOf())
+    var movieId: Int = 0
+    val detailSerie = MutableStateFlow<List<TmdbSerie>>(listOf())
+    var serieId: Int = 0
+    val detailActor = MutableStateFlow<List<TmdbActor>>(listOf())
+    var actorId: Int = 0
+    fun getMoviesWeek() {
+        viewModelScope.launch {
+            movies.value = api.lastmovies("d7a0c27757e49ea16fd7d78f18e896a5").results
+        }
+    }
+
+    fun getDetailMovie() {
+        viewModelScope.launch {
+            if (movieId != 0) {
+                detailMovie.value =
+                    api.detailmovie(movieId, "d7a0c27757e49ea16fd7d78f18e896a5").results
+            } else {
+
             }
         }
+    }
 
-            fun getSerieWeek() {
-                viewModelScope.launch {
-                    series.value = api.lastseries("d7a0c27757e49ea16fd7d78f18e896a5").results
-                }
+    fun getSerieWeek() {
+        viewModelScope.launch {
+            series.value = api.lastseries("d7a0c27757e49ea16fd7d78f18e896a5").results
+        }
+    }
+
+    fun getDetailSerie() {
+        viewModelScope.launch {
+            if (serieId != 0) {
+                detailSerie.value =
+                    api.detailserie(serieId, "d7a0c27757e49ea16fd7d78f18e896a5").results
+            } else {
+
+            }
+        }
     }
 
     fun getActors() {
         viewModelScope.launch {
             actors.value = api.acteurs("d7a0c27757e49ea16fd7d78f18e896a5").results
+        }
+    }
+
+    fun getDetailActor() {
+        viewModelScope.launch {
+            if (actorId != 0) {
+                detailActor.value =
+                    api.detailactor(actorId, "d7a0c27757e49ea16fd7d78f18e896a5").results
+            } else {
+
+            }
         }
     }
 }

@@ -1,10 +1,14 @@
 package com.example.cvdurandgabin.pages.série.Components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,9 +26,18 @@ fun CardSerie(serie: TmdbSerie) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .shadow(4.dp)
             .padding(12.dp)
     ) {
+        Card(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    MaterialTheme.colorScheme.background,
+                    shape = RoundedCornerShape(12.dp)
+                )
+                .shadow(4.dp),
+            elevation = 0.dp //
+        ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             AsyncImage(
                 model = "https://image.tmdb.org/t/p/w500/${serie.poster_path}",
@@ -44,5 +57,6 @@ fun CardSerie(serie: TmdbSerie) {
                 textAlign = TextAlign.Center
             )
         }
+    }
     }
 }

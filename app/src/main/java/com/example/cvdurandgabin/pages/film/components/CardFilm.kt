@@ -37,7 +37,8 @@ fun CardFilm(movie: TmdbMovie) {
                     shape = RoundedCornerShape(12.dp)
                 )
                 .shadow(4.dp),
-            elevation = 0.dp //
+            elevation = 0.dp
+
         ) {
 
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
