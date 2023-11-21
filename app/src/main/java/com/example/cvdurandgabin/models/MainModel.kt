@@ -21,6 +21,7 @@ class MainViewModel : ViewModel() {
     val series = MutableStateFlow<List<TmdbSerie>>(listOf())
     val actors = MutableStateFlow<List<TmdbActor>>(listOf())
     val detailMovie = MutableStateFlow<TmdbMovieDetail>(TmdbMovieDetail())
+    val detailSerie = MutableStateFlow<TmdbSerieDetail>(TmdbSerieDetail())
 
 
     fun getMoviesWeek() {
@@ -37,6 +38,11 @@ class MainViewModel : ViewModel() {
     fun getSerieWeek() {
         viewModelScope.launch {
             series.value = api.lastseries("d7a0c27757e49ea16fd7d78f18e896a5").results
+        }
+    }
+    fun getDetailSerie(id: Int) {
+        viewModelScope.launch {
+            detailSerie.value = api.detailserie(id, "d7a0c27757e49ea16fd7d78f18e896a5")
         }
     }
     fun getActors() {

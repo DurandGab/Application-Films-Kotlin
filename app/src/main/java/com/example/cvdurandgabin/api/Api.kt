@@ -4,6 +4,7 @@ package com.example.cvdurandgabin.api
 import com.example.cvdurandgabin.models.TmdbActorResult
 import com.example.cvdurandgabin.models.TmdbMovieDetail
 import com.example.cvdurandgabin.models.TmdbMovieResult
+import com.example.cvdurandgabin.models.TmdbSerieDetail
 
 import com.example.cvdurandgabin.models.TmdbSerieResult
 import retrofit2.http.GET
@@ -21,10 +22,10 @@ interface Api {
 
     @GET("trending/tv/week")
     suspend fun lastseries(@Query("api_key") api_key: String): TmdbSerieResult
-    /*@GET("tv/{series_id}&append_to_response=credits")
+    @GET("tv/{series_id}&append_to_response=credits")
     suspend fun detailserie(
         @Path("series_id") serieId: Int,
-        @Query("api_key") api_key: String): TmdbSerieDetail*/
+        @Query("api_key") api_key: String): TmdbSerieDetail
 
 
     @GET("person/popular")

@@ -13,10 +13,7 @@ class TmdbMovie(
     val genre_ids: List<Int> = listOf(),
     val poster_path: String? = "")
 
-data class TmdbSerieResult(
-    val page: Int,
-    val results: List<TmdbSerie> = listOf()
-)
+
 data class TmdbMovieDetail(
     val adult: Boolean = false,
     val backdrop_path: String = "",
@@ -102,6 +99,10 @@ data class Crew(
     val popularity: Double = 0.0,
     val profile_path: String = ""
 )
+data class TmdbSerieResult(
+    val page: Int,
+    val results: List<TmdbSerie> = listOf()
+)
 data class TmdbSerie(
     val adult: Boolean,
     val backdrop_path: String,
@@ -120,7 +121,109 @@ data class TmdbSerie(
     val vote_count: Int
 )
 
+data class TmdbSerieDetail(
+    val adult: Boolean = false,
+    val backdrop_path: String = "",
+    val created_by: List<CreatedBy> = listOf(),
+    val credits: CreditsSerie = CreditsSerie(),
+    val episode_run_time: List<Int> = listOf(),
+    val first_air_date: String = "",
+    val genres: List<Any> = listOf(),
+    val homepage: String = "",
+    val id: Int = 0,
+    val in_production: Boolean = false,
+    val languages: List<Any> = listOf(),
+    val last_air_date: String = "",
+    val last_episode_to_air: LastEpisodeToAir = LastEpisodeToAir(),
+    val name: String = "",
+    val networks: List<Any> = listOf(),
+    val next_episode_to_air: Any = Any(),
+    val number_of_episodes: Int = 0,
+    val number_of_seasons: Int = 0,
+    val origin_country: List<String> = listOf(),
+    val original_language: String = "",
+    val original_name: String = "",
+    val overview: String = "",
+    val popularity: Double = 0.0,
+    val poster_path: String = "",
+    val production_companies: List<Any> = listOf(),
+    val production_countries: List<Any> = listOf(),
+    val seasons: List<Season> = listOf(),
+    val spoken_languages: List<Any> = listOf(),
+    val status: String = "",
+    val tagline: String = "",
+    val type: String = "",
+    val vote_average: Double = 0.0,
+    val vote_count: Int = 0
+)
 
+data class CreatedBy(
+    val credit_id: String = "",
+    val gender: Int = 0,
+    val id: Int = 0,
+    val name: String = "",
+    val profile_path: Any = Any()
+)
+
+data class CreditsSerie(
+    val cast: List<CastSerie> = listOf(),
+    val crew: List<CrewSerie> = listOf()
+)
+
+data class LastEpisodeToAir(
+    val air_date: String = "",
+    val episode_number: Int = 0,
+    val episode_type: String = "",
+    val id: Int = 0,
+    val name: String = "",
+    val overview: String = "",
+    val production_code: String = "",
+    val runtime: Int = 0,
+    val season_number: Int = 0,
+    val show_id: Int = 0,
+    val still_path: Any = Any(),
+    val vote_average: Double = 0.0,
+    val vote_count: Int = 0
+)
+
+data class Season(
+    val air_date: String = "",
+    val episode_count: Int = 0,
+    val id: Int = 0,
+    val name: String = "",
+    val overview: String = "",
+    val poster_path: Any = Any(),
+    val season_number: Int = 0,
+    val vote_average: Double = 0.0
+)
+
+data class CastSerie(
+    val adult: Boolean = false,
+    val character: String = "",
+    val credit_id: String = "",
+    val gender: Int = 0,
+    val id: Int = 0,
+    val known_for_department: String = "",
+    val name: String = "",
+    val order: Int = 0,
+    val original_name: String = "",
+    val popularity: Double = 0.0,
+    val profile_path: String = ""
+)
+
+data class CrewSerie(
+    val adult: Boolean = false,
+    val credit_id: String = "",
+    val department: String = "",
+    val gender: Int = 0,
+    val id: Int = 0,
+    val job: String = "",
+    val known_for_department: String = "",
+    val name: String = "",
+    val original_name: String = "",
+    val popularity: Double = 0.0,
+    val profile_path: Any = Any()
+)
 data class TmdbActorResult(
     val page: Int,
     val results: List<TmdbActor> = listOf()

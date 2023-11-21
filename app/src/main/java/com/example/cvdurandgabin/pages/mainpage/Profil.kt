@@ -24,6 +24,7 @@ import com.example.cvdurandgabin.models.MainViewModel
 import com.example.cvdurandgabin.pages.acteur.acteur
 import com.example.cvdurandgabin.pages.film.components.DetailFilm
 import com.example.cvdurandgabin.pages.film.film
+import com.example.cvdurandgabin.pages.série.Components.DetailSerie
 import com.example.cvdurandgabin.pages.série.serie
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
@@ -63,10 +64,13 @@ fun Greeting(fullName: String, modifier: Modifier = Modifier, classes: WindowSiz
                 ) { navController.navigate(Destination.Film.destination) }
             }
             composable(Destination.Film.destination) { film(viewModel){ id-> navController.navigate("film/${id}") } }
-            composable(Destination.Acteur.destination) { acteur(viewModel) }
-            composable(Destination.Serie.destination) { serie(viewModel) }
             composable("film/{movieId}") { backStackEntry ->
                 DetailFilm(backStackEntry.arguments?.getString("movieId")!!.toInt(), viewModel) }
+            composable(Destination.Acteur.destination) { acteur(viewModel) }
+            composable(Destination.Serie.destination) { serie(viewModel) {id-> navController.navigate("serie/${id}")} }
+            composable("serie/{serieId}") { backStackEntry ->
+                DetailSerie(backStackEntry.arguments?.getString("serieId")!!.toInt(), viewModel) }
+
         }
     }
 }
