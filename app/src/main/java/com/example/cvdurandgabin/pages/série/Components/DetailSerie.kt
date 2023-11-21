@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -44,7 +45,7 @@ fun DetailSerie(id: Int, viewModel: MainViewModel) {
             ) {
                 Card(
                     modifier = Modifier
-                        .clip(MaterialTheme.shapes.medium)
+                        .clip(MaterialTheme.shapes.small)
                         .fillMaxSize()
                         .background(
                             MaterialTheme.colorScheme.background,
@@ -61,7 +62,7 @@ fun DetailSerie(id: Int, viewModel: MainViewModel) {
                             contentDescription = "Affiche Film",
                             modifier = Modifier
                                 .fillMaxSize()
-                                .height(500.dp),
+                                .height(400.dp),
                             contentScale = ContentScale.Crop
                         )
                         Text(

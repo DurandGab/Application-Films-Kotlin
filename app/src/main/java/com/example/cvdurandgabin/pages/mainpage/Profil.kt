@@ -8,7 +8,11 @@ import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
@@ -27,8 +31,15 @@ import com.example.cvdurandgabin.pages.film.components.DetailFilm
 import com.example.cvdurandgabin.pages.film.film
 import com.example.cvdurandgabin.pages.série.Components.DetailSerie
 import com.example.cvdurandgabin.pages.série.serie
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.ui.unit.dp
 
-@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun Greeting(fullName: String, modifier: Modifier = Modifier, classes: WindowSizeClass, viewModel: MainViewModel) {
     val navController = rememberNavController()
@@ -37,6 +48,41 @@ fun Greeting(fullName: String, modifier: Modifier = Modifier, classes: WindowSiz
 
     val destinations = listOf(Destination.Film, Destination.Serie, Destination.Acteur)
     Scaffold(
+        topBar = {
+            TopAppBar(
+                modifier = Modifier.statusBarsPadding(),
+                backgroundColor = MaterialTheme.colorScheme.primaryContainer,
+                title = {
+                    Text("Application Film", color = MaterialTheme.colorScheme.primary)
+                },
+                actions = {
+                    // Search icon
+                    IconButton(
+                        onClick = {
+                            // Handle search icon click
+                        }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = "Search"
+                        )
+                    }
+
+                    // Favorite icon
+                    IconButton(
+                        onClick = {
+                            // Handle favorite icon click
+                        }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Favorite,
+                            contentDescription = "Favorite"
+                        )
+                    }
+                }
+            )
+
+        },
         bottomBar = {
             if (currentDestination?.route != Destination.Home.destination)
                 BottomNavigation(

@@ -62,7 +62,7 @@ fun DetailActor(id: Int, viewModel: MainViewModel) {
                             model = "https://image.tmdb.org/t/p/w500/${detailactor.profile_path}",
                             contentDescription = "Affiche Film",
                             modifier = Modifier
-                                .fillMaxSize().height(500.dp),
+                                .fillMaxSize().height(400.dp),
                             contentScale = ContentScale.Crop
                         )
                         Text(
