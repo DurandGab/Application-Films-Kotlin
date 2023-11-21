@@ -1,6 +1,7 @@
 package com.example.cvdurandgabin.api
 
 
+import com.example.cvdurandgabin.models.TmdbActorDetail
 import com.example.cvdurandgabin.models.TmdbActorResult
 import com.example.cvdurandgabin.models.TmdbMovieDetail
 import com.example.cvdurandgabin.models.TmdbMovieResult
@@ -31,9 +32,9 @@ interface Api {
     @GET("person/popular")
     suspend fun acteurs(@Query("api_key") api_key: String): TmdbActorResult
 
-   /* @GET("person/{person_id}&append_to_response=credits")
+   @GET("person/{person_id}&append_to_response=credits")
     suspend fun detailactor(
         @Path("person_id") actorId: Int,
-        @Query("api_key") api_key: String): TmdbActorDetail*/
+        @Query("api_key") api_key: String): TmdbActorDetail
 }
 

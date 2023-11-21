@@ -16,4 +16,5 @@ sealed class Destination(val destination: String, val label: String, val icon: I
     object Acteur : Destination("acteur", "Liste des acteurs", Icons.Filled.Face)
     object FilmDetail : Destination("film/{movieId}", "Detail de film", Icons.Filled.Info)
     object SerieDetail : Destination("serie/{serieId}", "Detail de serie", Icons.Filled.Info)
+    object ActeurDetail : Destination("acteur/{actorId}", "Detail d'acteur", Icons.Filled.Info)
 }

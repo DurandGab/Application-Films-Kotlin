@@ -22,6 +22,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.cvdurandgabin.models.MainViewModel
 import com.example.cvdurandgabin.pages.acteur.acteur
+import com.example.cvdurandgabin.pages.acteur.components.DetailActor
 import com.example.cvdurandgabin.pages.film.components.DetailFilm
 import com.example.cvdurandgabin.pages.film.film
 import com.example.cvdurandgabin.pages.série.Components.DetailSerie
@@ -66,7 +67,9 @@ fun Greeting(fullName: String, modifier: Modifier = Modifier, classes: WindowSiz
             composable(Destination.Film.destination) { film(viewModel){ id-> navController.navigate("film/${id}") } }
             composable("film/{movieId}") { backStackEntry ->
                 DetailFilm(backStackEntry.arguments?.getString("movieId")!!.toInt(), viewModel) }
-            composable(Destination.Acteur.destination) { acteur(viewModel) }
+            composable(Destination.Acteur.destination) { acteur(viewModel) {id-> navController.navigate("acteur/${id}")} }
+            composable("acteur/{actorId}") { backStackEntry ->
+                DetailActor(backStackEntry.arguments?.getString("actorId")!!.toInt(), viewModel) }
             composable(Destination.Serie.destination) { serie(viewModel) {id-> navController.navigate("serie/${id}")} }
             composable("serie/{serieId}") { backStackEntry ->
                 DetailSerie(backStackEntry.arguments?.getString("serieId")!!.toInt(), viewModel) }

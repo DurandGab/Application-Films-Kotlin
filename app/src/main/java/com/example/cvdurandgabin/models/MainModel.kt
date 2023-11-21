@@ -22,7 +22,7 @@ class MainViewModel : ViewModel() {
     val actors = MutableStateFlow<List<TmdbActor>>(listOf())
     val detailMovie = MutableStateFlow<TmdbMovieDetail>(TmdbMovieDetail())
     val detailSerie = MutableStateFlow<TmdbSerieDetail>(TmdbSerieDetail())
-
+    val detailActor = MutableStateFlow<TmdbActorDetail>(TmdbActorDetail())
 
     fun getMoviesWeek() {
         viewModelScope.launch {
@@ -48,6 +48,11 @@ class MainViewModel : ViewModel() {
     fun getActors() {
         viewModelScope.launch {
             actors.value = api.acteurs("d7a0c27757e49ea16fd7d78f18e896a5").results
+        }
+    }
+    fun getDetailActor(id: Int) {
+        viewModelScope.launch {
+            detailActor.value = api.detailactor(id, "d7a0c27757e49ea16fd7d78f18e896a5")
         }
     }
 }
