@@ -16,7 +16,7 @@ import com.example.cvdurandgabin.models.MainViewModel
 import com.example.cvdurandgabin.pages.film.components.CardFilm
 
 @Composable
-fun film(viewModel: MainViewModel) {
+fun film(viewModel: MainViewModel, onClick: (id : Int) -> Unit) {
     val movies by viewModel.movies.collectAsStateWithLifecycle()
     LaunchedEffect(key1 = true) {
         viewModel.getMoviesWeek()
@@ -29,7 +29,7 @@ fun film(viewModel: MainViewModel) {
         ) {
             items(movies.size) {
                 CardFilm(movies[it],
-                    )
+                    onClick)
             }
         }
     }

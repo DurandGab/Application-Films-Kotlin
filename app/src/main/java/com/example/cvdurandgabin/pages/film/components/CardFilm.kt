@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -22,8 +23,9 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.cvdurandgabin.models.TmdbMovie
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun CardFilm(movie: TmdbMovie) {
+fun CardFilm(movie: TmdbMovie, onClick : (id : Int) -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -37,8 +39,8 @@ fun CardFilm(movie: TmdbMovie) {
                     shape = RoundedCornerShape(12.dp)
                 )
                 .shadow(4.dp),
-            elevation = 0.dp
-
+            elevation = 0.dp,
+            onClick = {onClick(movie.id)}
         ) {
 
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -58,7 +60,7 @@ fun CardFilm(movie: TmdbMovie) {
 
                 )
                 Text(
-                    movie.release_date,
+                    movie.release_date.substring(0,4),
                     textAlign = TextAlign.Center
                 )
             }

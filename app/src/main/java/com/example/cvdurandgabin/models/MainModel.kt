@@ -20,60 +20,28 @@ class MainViewModel : ViewModel() {
     val movies = MutableStateFlow<List<TmdbMovie>>(listOf())
     val series = MutableStateFlow<List<TmdbSerie>>(listOf())
     val actors = MutableStateFlow<List<TmdbActor>>(listOf())
-    val detailMovie = MutableStateFlow<List<TmdbMovie>>(listOf())
-    var movieId: Int = 0
-    val detailSerie = MutableStateFlow<List<TmdbSerie>>(listOf())
-    var serieId: Int = 0
-    val detailActor = MutableStateFlow<List<TmdbActor>>(listOf())
-    var actorId: Int = 0
+    val detailMovie = MutableStateFlow<TmdbMovieDetail>(TmdbMovieDetail())
+
+
     fun getMoviesWeek() {
         viewModelScope.launch {
             movies.value = api.lastmovies("d7a0c27757e49ea16fd7d78f18e896a5").results
         }
     }
 
-    fun getDetailMovie() {
+    fun getDetailMovie(id: Int) {
         viewModelScope.launch {
-            if (movieId != 0) {
-                detailMovie.value =
-                    api.detailmovie(movieId, "d7a0c27757e49ea16fd7d78f18e896a5").results
-            } else {
-
-            }
+            detailMovie.value = api.detailmovie(id, "d7a0c27757e49ea16fd7d78f18e896a5")
         }
     }
-
     fun getSerieWeek() {
         viewModelScope.launch {
             series.value = api.lastseries("d7a0c27757e49ea16fd7d78f18e896a5").results
         }
     }
-
-    fun getDetailSerie() {
-        viewModelScope.launch {
-            if (serieId != 0) {
-                detailSerie.value =
-                    api.detailserie(serieId, "d7a0c27757e49ea16fd7d78f18e896a5").results
-            } else {
-
-            }
-        }
-    }
-
     fun getActors() {
         viewModelScope.launch {
             actors.value = api.acteurs("d7a0c27757e49ea16fd7d78f18e896a5").results
-        }
-    }
-
-    fun getDetailActor() {
-        viewModelScope.launch {
-            if (actorId != 0) {
-                detailActor.value =
-                    api.detailactor(actorId, "d7a0c27757e49ea16fd7d78f18e896a5").results
-            } else {
-
-            }
         }
     }
 }

@@ -1,7 +1,74 @@
 package com.example.cvdurandgabin.pages.film.components
 
-import com.example.cvdurandgabin.models.TmdbMovie
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
+import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavHostController
+import coil.compose.AsyncImage
+import com.example.cvdurandgabin.models.MainViewModel
 
-fun DetailFilm(movieId : TmdbMovie){
+@Composable
+fun DetailFilm(id: Int, viewModel: MainViewModel){
+    val detailmovie by viewModel.detailMovie.collectAsStateWithLifecycle()
+    LaunchedEffect(key1 = true) {
+        viewModel.getDetailMovie(id)
+    }
 
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(12.dp)
+    ) {
+        Card(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(
+                    MaterialTheme.colorScheme.background,
+                    shape = RoundedCornerShape(12.dp)
+                )
+                .shadow(4.dp),
+            elevation = 0.dp,
+        ) {
+
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+
+                AsyncImage(
+                    model = "https://image.tmdb.org/t/p/w500/${detailmovie.poster_path}",
+                    contentDescription = "Affiche Film",
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    contentScale = ContentScale.Crop
+                )
+                Text(
+                    detailmovie.title,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(5.dp)
+
+
+                )
+                Text(
+                    detailmovie.release_date,
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
+    }
 }

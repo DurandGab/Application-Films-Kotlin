@@ -22,6 +22,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.cvdurandgabin.models.MainViewModel
 import com.example.cvdurandgabin.pages.acteur.acteur
+import com.example.cvdurandgabin.pages.film.components.DetailFilm
 import com.example.cvdurandgabin.pages.film.film
 import com.example.cvdurandgabin.pages.série.serie
 
@@ -61,9 +62,11 @@ fun Greeting(fullName: String, modifier: Modifier = Modifier, classes: WindowSiz
                     classes = classes,
                 ) { navController.navigate(Destination.Film.destination) }
             }
-            composable(Destination.Film.destination) { film(viewModel) }
+            composable(Destination.Film.destination) { film(viewModel){ id-> navController.navigate("film/${id}") } }
             composable(Destination.Acteur.destination) { acteur(viewModel) }
             composable(Destination.Serie.destination) { serie(viewModel) }
+            composable("film/{movieId}") { backStackEntry ->
+                DetailFilm(backStackEntry.arguments?.getString("movieId")!!.toInt(), viewModel) }
         }
     }
 }

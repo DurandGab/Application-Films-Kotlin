@@ -52,10 +52,6 @@ fun CardActor(actor: TmdbActor) {
                 modifier = Modifier.padding(5.dp),
                 textAlign = TextAlign.Center,
             )
-            Text(
-                actor.original_name,
-                textAlign = TextAlign.Center
-            )
         }
     }
     }
