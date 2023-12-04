@@ -3,6 +3,7 @@ package com.example.cvdurandgabin.pages.film.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -74,9 +75,24 @@ fun DetailFilm(id: Int, viewModel: MainViewModel){
                             textAlign = TextAlign.Center,
                             modifier = Modifier.padding(5.dp)
                         )
+                        Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            detailmovie.release_date,
+                            text = "Date de sortie : ${detailmovie.release_date}",
                             textAlign = TextAlign.Center
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = "Synopsis :",
+                            textAlign = TextAlign.Start,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .align(Alignment.Start)
+                        )
+                        Text(
+                            text = detailmovie.overview,
+                            textAlign = TextAlign.Start,
+                            modifier = Modifier.padding(8.dp)
                         )
                     }
 

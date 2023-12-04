@@ -1,11 +1,11 @@
 package com.example.cvdurandgabin.pages.acteur.components
 
 
-
 import android.content.ClipData.Item
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -31,14 +31,15 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.cvdurandgabin.models.MainViewModel
 
+
 @Composable
 fun DetailActor(id: Int, viewModel: MainViewModel) {
     val detailactor by viewModel.detailActor.collectAsStateWithLifecycle()
     LaunchedEffect(key1 = true) {
         viewModel.getDetailActor(id)
     }
-    LazyColumn(){
-        item{
+    LazyColumn() {
+        item {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -62,7 +63,8 @@ fun DetailActor(id: Int, viewModel: MainViewModel) {
                             model = "https://image.tmdb.org/t/p/w500/${detailactor.profile_path}",
                             contentDescription = "Affiche Film",
                             modifier = Modifier
-                                .fillMaxSize().height(400.dp),
+                                .fillMaxSize()
+                                .height(400.dp),
                             contentScale = ContentScale.Crop
                         )
                         Text(
@@ -70,17 +72,32 @@ fun DetailActor(id: Int, viewModel: MainViewModel) {
                             fontWeight = FontWeight.Bold,
                             textAlign = TextAlign.Center,
                             modifier = Modifier.padding(5.dp)
-
-
                         )
+                        Spacer(modifier = Modifier.height(8.dp)) // Espacement entre le nom et la date d'anniversaire
                         Text(
                             text = "Date d'anniversaire : ${detailactor.birthday}",
                             textAlign = TextAlign.Center
+                        )
+                        Spacer(modifier = Modifier.height(8.dp)) // Espacement entre la date d'anniversaire et la biographie
+                        Text(
+                            text = "Biographie :",
+                            textAlign = TextAlign.Start,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .align(Alignment.Start)
+                        )
+                        Text(
+                            text = detailactor.biography,
+                            textAlign = TextAlign.Start,
+                            modifier = Modifier.padding(8.dp)
                         )
                     }
                 }
             }
         }
     }
+
+
 
 }

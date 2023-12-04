@@ -4,6 +4,7 @@ package com.example.cvdurandgabin.pages.série.Components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -70,12 +71,25 @@ fun DetailSerie(id: Int, viewModel: MainViewModel) {
                             fontWeight = FontWeight.Bold,
                             textAlign = TextAlign.Center,
                             modifier = Modifier.padding(5.dp)
-
-
+                        )
+                        Spacer(modifier = Modifier.height(8.dp)) // Espacement entre le nom et la date d'anniversaire
+                        Text(
+                            text = "Date de sortie : ${detailserie.first_air_date}",
+                            textAlign = TextAlign.Center
+                        )
+                        Spacer(modifier = Modifier.height(8.dp)) // Espacement entre la date d'anniversaire et la biographie
+                        Text(
+                            text = "Synopsis :",
+                            textAlign = TextAlign.Start,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .align(Alignment.Start)
                         )
                         Text(
-                            detailserie.first_air_date,
-                            textAlign = TextAlign.Center
+                            text = detailserie.overview,
+                            textAlign = TextAlign.Start,
+                            modifier = Modifier.padding(8.dp)
                         )
                     }
                 }

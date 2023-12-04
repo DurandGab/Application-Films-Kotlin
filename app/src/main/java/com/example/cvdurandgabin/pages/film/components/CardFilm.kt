@@ -66,7 +66,7 @@ fun CardFilm(movie: TmdbMovie, onClick : (id : Int) -> Unit) {
                     modifier = Modifier.padding(5.dp)
                 )
                 Text(
-                    movie.release_date.substring(0, 4),
+                    movie.release_date,
                     textAlign = TextAlign.Center
                 )
 

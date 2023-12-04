@@ -2,7 +2,9 @@ package com.example.cvdurandgabin.models
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.room.Room
 import com.example.cvdurandgabin.api.Api
+import com.example.cvdurandgabin.room.AppDatabaseFilm
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
@@ -23,6 +25,8 @@ class MainViewModel : ViewModel() {
     val detailMovie = MutableStateFlow<TmdbMovieDetail>(TmdbMovieDetail())
     val detailSerie = MutableStateFlow<TmdbSerieDetail>(TmdbSerieDetail())
     val detailActor = MutableStateFlow<TmdbActorDetail>(TmdbActorDetail())
+
+
 
     fun getMoviesWeek() {
         viewModelScope.launch {

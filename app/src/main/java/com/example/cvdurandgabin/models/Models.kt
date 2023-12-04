@@ -11,7 +11,8 @@ class TmdbMovie(
     val original_title: String = "",
     val backdrop_path: String? = "",
     val genre_ids: List<Int> = listOf(),
-    val poster_path: String? = "")
+    val poster_path: String? = "",
+    val isFav: Boolean = false)
 
 
 data class TmdbMovieDetail(
@@ -118,7 +119,8 @@ data class TmdbSerie(
     val popularity: Double,
     val poster_path: String,
     val vote_average: Double,
-    val vote_count: Int
+    val vote_count: Int,
+    val isFav: Boolean = false
 )
 
 data class TmdbSerieDetail(
@@ -238,7 +240,8 @@ data class TmdbActor(
     val name: String,
     val original_name: String,
     val popularity: Double,
-    val profile_path: String
+    val profile_path: String,
+    val isFav:Boolean = false
 )
 
 data class KnownFor(
