@@ -25,12 +25,21 @@ class MainViewModel : ViewModel() {
     val detailMovie = MutableStateFlow<TmdbMovieDetail>(TmdbMovieDetail())
     val detailSerie = MutableStateFlow<TmdbSerieDetail>(TmdbSerieDetail())
     val detailActor = MutableStateFlow<TmdbActorDetail>(TmdbActorDetail())
+    val searchmovieresult = MutableStateFlow<List<TmdbMovie>>(listOf())
+    val searchserieresult = MutableStateFlow<List<TmdbSerie>>(listOf())
+    val searchactorresult = MutableStateFlow<List<TmdbActor>>(listOf())
 
 
 
     fun getMoviesWeek() {
         viewModelScope.launch {
             movies.value = api.lastmovies("d7a0c27757e49ea16fd7d78f18e896a5").results
+        }
+    }
+
+    fun getSerachMovies(query: String) {
+        viewModelScope.launch {
+           searchmovieresult.value = api.searchMovies("d7a0c27757e49ea16fd7d78f18e896a5", query).results
         }
     }
 
@@ -44,6 +53,11 @@ class MainViewModel : ViewModel() {
             series.value = api.lastseries("d7a0c27757e49ea16fd7d78f18e896a5").results
         }
     }
+    fun getSerachSerie(query: String) {
+        viewModelScope.launch {
+            searchserieresult.value = api.searchSerie("d7a0c27757e49ea16fd7d78f18e896a5", query).results
+        }
+    }
     fun getDetailSerie(id: Int) {
         viewModelScope.launch {
             detailSerie.value = api.detailserie(id, "d7a0c27757e49ea16fd7d78f18e896a5")
@@ -52,6 +66,11 @@ class MainViewModel : ViewModel() {
     fun getActors() {
         viewModelScope.launch {
             actors.value = api.acteurs("d7a0c27757e49ea16fd7d78f18e896a5").results
+        }
+    }
+    fun getSerachActor(query: String) {
+        viewModelScope.launch {
+            searchactorresult.value = api.searchActor("d7a0c27757e49ea16fd7d78f18e896a5", query).results
         }
     }
     fun getDetailActor(id: Int) {

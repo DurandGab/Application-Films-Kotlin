@@ -36,5 +36,21 @@ interface Api {
     suspend fun detailactor(
         @Path("person_id") actorId: Int,
         @Query("api_key") api_key: String): TmdbActorDetail
+    @GET("search/movie")
+    suspend fun searchMovies(
+        @Query("api_key") apiKey: String,
+        @Query("query") query: String
+    ): TmdbMovieResult
+    @GET("search/tv")
+    suspend fun searchSerie(
+        @Query("api_key") apiKey: String,
+        @Query("query") query: String
+    ): TmdbSerieResult
+
+    @GET("search/person")
+    suspend fun searchActor(
+        @Query("api_key") apiKey: String,
+        @Query("query") query: String
+    ): TmdbActorResult
 }
 
