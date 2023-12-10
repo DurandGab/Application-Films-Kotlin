@@ -1,6 +1,8 @@
 package com.example.cvdurandgabin.api
 
 
+import com.example.cvdurandgabin.models.Credits
+import com.example.cvdurandgabin.models.CreditsSerie
 import com.example.cvdurandgabin.models.TmdbActorDetail
 import com.example.cvdurandgabin.models.TmdbActorResult
 import com.example.cvdurandgabin.models.TmdbMovieDetail
@@ -21,12 +23,22 @@ interface Api {
         @Path("movie_id") movieId: Int,
         @Query("api_key") api_key: String): TmdbMovieDetail
 
+    @GET("movie/{movie_id}/credits")
+    suspend fun creditsmovie(
+        @Path("movie_id") movieId: Int,
+        @Query("api_key") api_key: String): Credits
+
     @GET("trending/tv/week")
     suspend fun lastseries(@Query("api_key") api_key: String): TmdbSerieResult
     @GET("tv/{series_id}&append_to_response=credits")
     suspend fun detailserie(
         @Path("series_id") serieId: Int,
         @Query("api_key") api_key: String): TmdbSerieDetail
+
+    @GET("tv/{series_id}/credits")
+    suspend fun creditstv(
+        @Path("series_id") serieId: Int,
+        @Query("api_key") api_key: String): CreditsSerie
 
 
     @GET("person/popular")

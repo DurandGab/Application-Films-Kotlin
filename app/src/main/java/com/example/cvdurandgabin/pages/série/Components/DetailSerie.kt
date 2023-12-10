@@ -1,6 +1,7 @@
 package com.example.cvdurandgabin.pages.série.Components
 
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,6 +30,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.cvdurandgabin.models.MainViewModel
+import com.example.cvdurandgabin.pages.film.components.TeteAfficheFilm
 
 @Composable
 fun DetailSerie(id: Int, viewModel: MainViewModel) {
@@ -94,6 +96,10 @@ fun DetailSerie(id: Int, viewModel: MainViewModel) {
                     }
                 }
             }
+        }
+        items(detailserie.credits.cast.size) { index ->
+            TeteAfficheSerie(index, detailserie)
+            Log.d("test", detailserie.credits.cast.size.toString())
         }
     }
 

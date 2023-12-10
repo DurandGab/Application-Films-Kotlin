@@ -1,5 +1,6 @@
 package com.example.cvdurandgabin.pages.mainpage
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import com.example.cvdurandgabin.Destination
 
 
@@ -37,7 +38,12 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
+import com.example.cvdurandgabin.models.TmdbMovieDetail
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class, ExperimentalMaterial3Api::class)
 @Composable
@@ -45,43 +51,35 @@ fun Greeting(fullName: String, modifier: Modifier = Modifier, classes: WindowSiz
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
-
+    var searchTerm by remember { mutableStateOf("") }
     val destinations = listOf(Destination.Film, Destination.Serie, Destination.Acteur)
     Scaffold(
         topBar = {
             TopAppBar(
-                modifier = Modifier.statusBarsPadding(),
-                backgroundColor = MaterialTheme.colorScheme.primaryContainer,
                 title = {
-                    Text("Application Film", color = MaterialTheme.colorScheme.primary)
+                    OutlinedTextField(value = searchTerm, onValueChange = {
+                        searchTerm = it
+                    },
+                        label = {Text("rechercher des films")},
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(8.dp)
+                    )
                 },
                 actions = {
-                    // Search icon
+                    // Bouton de recherche dans la TopAppBar
                     IconButton(
                         onClick = {
-                            // Handle search icon click
+                            viewModel.getSearchMovies(searchTerm)
                         }
                     ) {
                         Icon(
                             imageVector = Icons.Default.Search,
-                            contentDescription = "Search"
-                        )
-                    }
-
-                    // Favorite icon
-                    IconButton(
-                        onClick = {
-                            // Handle favorite icon click
-                        }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Favorite,
-                            contentDescription = "Favorite"
+                            contentDescription = "Rechercher"
                         )
                     }
                 }
             )
-
         },
         bottomBar = {
             if (currentDestination?.route != Destination.Home.destination)
@@ -120,6 +118,14 @@ fun Greeting(fullName: String, modifier: Modifier = Modifier, classes: WindowSiz
             composable("serie/{serieId}") { backStackEntry ->
                 DetailSerie(backStackEntry.arguments?.getString("serieId")!!.toInt(), viewModel) }
 
+        }
+    }
+    val searchMovieResult by viewModel.searchmovieresult.collectAsState()
+
+    if (searchMovieResult != null) {
+        // Utilisez searchMovieResult.results pour afficher la liste des films résultants
+        for (movie in searchMovieResult) {
+            // Affichez chaque film dans votre UI
         }
     }
 }

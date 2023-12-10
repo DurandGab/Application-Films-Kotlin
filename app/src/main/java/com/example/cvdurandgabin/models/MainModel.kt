@@ -37,7 +37,7 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun getSerachMovies(query: String) {
+    fun getSearchMovies(query: String) {
         viewModelScope.launch {
            searchmovieresult.value = api.searchMovies("d7a0c27757e49ea16fd7d78f18e896a5", query).results
         }
@@ -46,6 +46,7 @@ class MainViewModel : ViewModel() {
     fun getDetailMovie(id: Int) {
         viewModelScope.launch {
             detailMovie.value = api.detailmovie(id, "d7a0c27757e49ea16fd7d78f18e896a5")
+            detailMovie.value.credits = api.creditsmovie(id, "d7a0c27757e49ea16fd7d78f18e896a5")
         }
     }
     fun getSerieWeek() {
@@ -61,6 +62,7 @@ class MainViewModel : ViewModel() {
     fun getDetailSerie(id: Int) {
         viewModelScope.launch {
             detailSerie.value = api.detailserie(id, "d7a0c27757e49ea16fd7d78f18e896a5")
+            detailSerie.value.credits = api.creditstv(id, "d7a0c27757e49ea16fd7d78f18e896a5")
         }
     }
     fun getActors() {
