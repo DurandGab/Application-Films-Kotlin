@@ -120,7 +120,7 @@ fun Greeting(fullName: String, modifier: Modifier = Modifier, classes: WindowSiz
 
         }
     }
-    val searchMovieResult by viewModel.searchmovieresult.collectAsState()
+    val searchMovieResult by viewModel.movies.collectAsState()
 
     if (searchMovieResult != null) {
         // Utilisez searchMovieResult.results pour afficher la liste des films résultants

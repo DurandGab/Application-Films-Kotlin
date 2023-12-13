@@ -25,9 +25,6 @@ class MainViewModel : ViewModel() {
     val detailMovie = MutableStateFlow<TmdbMovieDetail>(TmdbMovieDetail())
     val detailSerie = MutableStateFlow<TmdbSerieDetail>(TmdbSerieDetail())
     val detailActor = MutableStateFlow<TmdbActorDetail>(TmdbActorDetail())
-    val searchmovieresult = MutableStateFlow<List<TmdbMovie>>(listOf())
-    val searchserieresult = MutableStateFlow<List<TmdbSerie>>(listOf())
-    val searchactorresult = MutableStateFlow<List<TmdbActor>>(listOf())
 
 
 
@@ -39,14 +36,13 @@ class MainViewModel : ViewModel() {
 
     fun getSearchMovies(query: String) {
         viewModelScope.launch {
-           searchmovieresult.value = api.searchMovies("d7a0c27757e49ea16fd7d78f18e896a5", query).results
+           movies.value = api.searchMovies(query,"d7a0c27757e49ea16fd7d78f18e896a5").results
         }
     }
 
     fun getDetailMovie(id: Int) {
         viewModelScope.launch {
             detailMovie.value = api.detailmovie(id, "d7a0c27757e49ea16fd7d78f18e896a5")
-            detailMovie.value.credits = api.creditsmovie(id, "d7a0c27757e49ea16fd7d78f18e896a5")
         }
     }
     fun getSerieWeek() {
@@ -56,13 +52,12 @@ class MainViewModel : ViewModel() {
     }
     fun getSerachSerie(query: String) {
         viewModelScope.launch {
-            searchserieresult.value = api.searchSerie("d7a0c27757e49ea16fd7d78f18e896a5", query).results
+            series.value = api.searchSerie("d7a0c27757e49ea16fd7d78f18e896a5", query).results
         }
     }
     fun getDetailSerie(id: Int) {
         viewModelScope.launch {
             detailSerie.value = api.detailserie(id, "d7a0c27757e49ea16fd7d78f18e896a5")
-            detailSerie.value.credits = api.creditstv(id, "d7a0c27757e49ea16fd7d78f18e896a5")
         }
     }
     fun getActors() {
@@ -72,7 +67,7 @@ class MainViewModel : ViewModel() {
     }
     fun getSerachActor(query: String) {
         viewModelScope.launch {
-            searchactorresult.value = api.searchActor("d7a0c27757e49ea16fd7d78f18e896a5", query).results
+            actors.value = api.searchActor("d7a0c27757e49ea16fd7d78f18e896a5", query).results
         }
     }
     fun getDetailActor(id: Int) {

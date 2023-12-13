@@ -18,33 +18,22 @@ interface Api {
     @GET("trending/movie/week")
     suspend fun lastmovies(@Query("api_key") api_key: String): TmdbMovieResult
 
-    @GET("movie/{movie_id}&append_to_response=credits")
+    @GET("movie/{movie_id}?append_to_response=credits")
     suspend fun detailmovie(
         @Path("movie_id") movieId: Int,
         @Query("api_key") api_key: String): TmdbMovieDetail
 
-    @GET("movie/{movie_id}/credits")
-    suspend fun creditsmovie(
-        @Path("movie_id") movieId: Int,
-        @Query("api_key") api_key: String): Credits
-
     @GET("trending/tv/week")
     suspend fun lastseries(@Query("api_key") api_key: String): TmdbSerieResult
-    @GET("tv/{series_id}&append_to_response=credits")
+    @GET("tv/{series_id}?append_to_response=credits")
     suspend fun detailserie(
         @Path("series_id") serieId: Int,
         @Query("api_key") api_key: String): TmdbSerieDetail
 
-    @GET("tv/{series_id}/credits")
-    suspend fun creditstv(
-        @Path("series_id") serieId: Int,
-        @Query("api_key") api_key: String): CreditsSerie
-
-
     @GET("person/popular")
     suspend fun acteurs(@Query("api_key") api_key: String): TmdbActorResult
 
-   @GET("person/{person_id}&append_to_response=credits")
+   @GET("person/{person_id}?append_to_response=credits")
     suspend fun detailactor(
         @Path("person_id") actorId: Int,
         @Query("api_key") api_key: String): TmdbActorDetail

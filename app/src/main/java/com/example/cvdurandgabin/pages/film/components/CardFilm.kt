@@ -69,22 +69,6 @@ fun CardFilm(movie: TmdbMovie, onClick : (id : Int) -> Unit) {
                     movie.release_date,
                     textAlign = TextAlign.Center
                 )
-
-                IconButton(
-                    onClick = {
-                        // Handle favorite icon click
-                    },
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .offset(x= 8.dp, y = 8.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Favorite,
-                        contentDescription = "Favorite",
-                        tint =
-                            androidx.compose.material3.MaterialTheme.colorScheme.primary
-                    )
-                }
             }
         }
     }

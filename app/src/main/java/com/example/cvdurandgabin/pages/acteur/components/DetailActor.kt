@@ -3,6 +3,7 @@ package com.example.cvdurandgabin.pages.acteur.components
 
 import android.content.ClipData.Item
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.layout.LazyLayoutIntervalContent
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -30,6 +32,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.cvdurandgabin.models.MainViewModel
+import com.example.cvdurandgabin.pages.film.components.TeteAfficheFilm
 
 
 @Composable
@@ -92,7 +95,28 @@ fun DetailActor(id: Int, viewModel: MainViewModel) {
                             textAlign = TextAlign.Start,
                             modifier = Modifier.padding(8.dp)
                         )
+                        Text(
+                            text = "Célebre pour :",
+                            textAlign = TextAlign.Start,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .align(Alignment.Start)
+                        )
                     }
+                }
+            }
+        }
+        item {
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                items(detailactor.credits.cast.size) { index ->
+                    CelebrePourFilm(
+                        index,
+                        detailactor
+                    )
                 }
             }
         }

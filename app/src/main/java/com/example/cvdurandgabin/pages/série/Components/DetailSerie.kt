@@ -3,6 +3,7 @@ package com.example.cvdurandgabin.pages.série.Components
 
 import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Text
@@ -79,7 +81,7 @@ fun DetailSerie(id: Int, viewModel: MainViewModel) {
                             text = "Date de sortie : ${detailserie.first_air_date}",
                             textAlign = TextAlign.Center
                         )
-                        Spacer(modifier = Modifier.height(8.dp)) // Espacement entre la date d'anniversaire et la biographie
+                        Spacer(modifier = Modifier.height(8.dp))
                         Text(
                             text = "Synopsis :",
                             textAlign = TextAlign.Start,
@@ -93,13 +95,30 @@ fun DetailSerie(id: Int, viewModel: MainViewModel) {
                             textAlign = TextAlign.Start,
                             modifier = Modifier.padding(8.dp)
                         )
+                        Text(
+                            text = "Casting :",
+                            textAlign = TextAlign.Start,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .align(Alignment.Start)
+                        )
                     }
                 }
             }
         }
-        items(detailserie.credits.cast.size) { index ->
-            TeteAfficheSerie(index, detailserie)
-            Log.d("test", detailserie.credits.cast.size.toString())
+        item {
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                items(detailserie.credits.cast.size) { index ->
+                    TeteAfficheSerie(
+                        index,
+                        detailserie
+                    )
+                }
+            }
         }
     }
 
